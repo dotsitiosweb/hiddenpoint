@@ -856,13 +856,23 @@
             }
         }
 
-        function loadVideo(videoId, element) {
-            const sectionId = 'clases';
-            const videoFrame = document.getElementById('videoFrame');
+        // Función loadVideo actualizada
+        function loadVideo(videoId, element, section = 'clases') {
+            const sectionId = section || 'clases';
+            const videoFrame = document.getElementById(`${sectionId === 'clases2' ? 'clases2VideoFrame' : 'videoFrame'}`);
             
-            videoFrame.src = `https://www.youtube.com/embed/${videoId}?` + 
-                            'autoplay=1&rel=0&modestbranding=1&' + 
-                            'iv_load_policy=3&controls=1&fs=1&playsinline=1';
+            // Extraer el ID base y los parámetros adicionales
+            const [baseId, params] = videoId.split('?');
+            
+            // Construir la URL con todos los parámetros
+            let videoUrl = `https://www.youtube.com/embed/${baseId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&fs=1&playsinline=1`;
+            
+            // Agregar parámetros adicionales si existen
+            if (params) {
+                videoUrl += `&${params}`;
+            }
+            
+            videoFrame.src = videoUrl;
             
             const unidadNombre = element.closest('.submenu').previousElementSibling.textContent.trim();
             const recursoNombre = element.textContent;
