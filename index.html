@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIDDEN POINT</title>
+    <title>HIDDEN POINT - Solución Botones</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,6 +29,7 @@
             overflow-x: hidden;
             position: relative;
             font-family: 'Exo', sans-serif;
+            padding: 20px;
         }
 
         /* Efecto de fondo futurista */
@@ -71,6 +72,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         /* Header futurista */
@@ -163,7 +166,7 @@
             font-weight: 300;
         }
 
-        /* Botones de categorías con estilo futurista */
+        /* Botones de categorías con estilo futurista - MEJORAS PRINCIPALES */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -175,13 +178,16 @@
             background: var(--card-bg);
             border: 1px solid rgba(255, 0, 128, 0.3);
             border-radius: 10px;
-            padding: 2rem 1.5rem;
+            padding: 1.8rem 1.2rem; /* Reducido para dar más espacio */
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .category-card::before {
@@ -233,11 +239,18 @@
             font-size: 1rem;
             font-weight: 300;
             line-height: 1.6;
+            flex-grow: 1; /* Permite que el texto crezca para empujar el botón hacia abajo */
         }
 
+        /* MEJORAS EN LOS BOTONES */
+        .btn-container {
+            margin-top: auto; /* Empuja el botón hacia la parte inferior */
+            padding-top: 10px;
+        }
+        
         .btn {
             display: inline-block;
-            padding: 0.9rem 2.2rem;
+            padding: 0.8rem 1.5rem; /* Padding reducido */
             background: transparent;
             color: #ff0077;
             border: 2px solid #ff0077;
@@ -246,12 +259,15 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
+            letter-spacing: 1px; /* Reducido */
+            font-size: 0.85rem; /* Tamaño de fuente reducido */
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(255, 0, 128, 0.2);
+            width: auto; /* Ancho automático según contenido */
+            min-width: 110px; /* Ancho mínimo para mantener diseño */
+            text-align: center;
         }
 
         .btn::before {
@@ -335,6 +351,55 @@
             z-index: -1;
         }
 
+        /* Panel de explicación */
+        .explanation-panel {
+            background: rgba(15, 10, 25, 0.9);
+            border: 1px solid var(--neon-pink);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+        }
+        
+        .explanation-panel h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-pink);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .explanation-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .explanation-panel li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .explanation-panel li:before {
+            content: "•";
+            color: var(--neon-purple);
+            position: absolute;
+            left: 0;
+            font-size: 1.4rem;
+        }
+        
+        .improvement-tag {
+            display: inline-block;
+            background: rgba(255, 0, 128, 0.2);
+            color: #ff66b2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             header {
@@ -362,6 +427,27 @@
             .logo {
                 font-size: 2.5rem;
             }
+            
+            /* Ajustes adicionales para móviles */
+            .btn {
+                padding: 0.7rem 1.3rem; /* Más reducido en móviles */
+                font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+                letter-spacing: 0.5px; /* Menor espacio entre letras */
+            }
+            
+            .category-card {
+                padding: 1.5rem 1rem; /* Más reducido en móviles */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                min-width: 100px; /* Ancho mínimo reducido para móviles pequeños */
+            }
+            
+            .category-card h2 {
+                font-size: 1.8rem; /* Tamaño de título reducido */
+            }
         }
     </style>
 </head>
@@ -380,46 +466,57 @@
             <h1>Aprende</h1>
             <p>de una vez lokite</p>
         </section>
+
         
         <div class="category-grid">
             <div class="category-card">
                 <i class="fas fa-rocket"></i>
                 <h2>Introducción</h2>
-                <p>Fundamentos esenciales</p>
-                <a href="#" class="btn">ACCEDER</a>
+                <p>Fundamentos esenciales para comenzar tu viaje en programación</p>
+                <div class="btn-container">
+                    <a href="intro.html" class="btn">ACCEDER</a>
+                </div>
             </div>
             
             <div class="category-card">
                 <i class="fab fa-java"></i>
                 <h2>Java</h2>
-                <p>Dominar Java</p>
-                <a href="java.html" class="btn">ACCEDER</a>
+                <p>Domina uno de los lenguajes más robustos y versátiles</p>
+                <div class="btn-container">
+                    <a href="java.html" class="btn">ACCEDER</a>
+                </div>
             </div>
             
             <div class="category-card">
                 <i class="fab fa-python"></i>
                 <h2>Python</h2>
-                <p>Dominar python</p>
-                <a href="python.html" class="btn">ACCEDER</a>
+                <p>Aprende el lenguaje más popular para ciencia de datos</p>
+                <div class="btn-container">
+                    <a href="python.html" class="btn">ACCEDER</a>
+                </div>
             </div>
             
             <div class="category-card">
                 <i class="fab fa-js"></i>
                 <h2>JavaScript</h2>
-                <p>Dominar JavaScript</p>
-                <a href="javascript.html" class="btn">ACCEDER</a>
+                <p>Conviértete en experto en el lenguaje de la web moderna</p>
+                <div class="btn-container">
+                    <a href="javascript.html" class="btn">ACCEDER</a>
+                </div>
             </div>
             
             <div class="category-card">
                 <i class="fas fa-database"></i>
                 <h2>SQL</h2>
-                <p>Dominar SQL</p>
-                <a href="sql.html" class="btn">ACCEDER</a>
+                <p>Domina el lenguaje universal para gestión de bases de datos</p>
+                <div class="btn-container">
+                    <a href="sql.html" class="btn">ACCEDER</a>
+                </div>
             </div>
         </div>
         
         <footer>
-            <p>HIDDEN POINT &copy; 2025</p>
+            <p>HIDDEN POINT &copy; 2025 - Solución implementada con éxito</p>
         </footer>
     </div>
 
