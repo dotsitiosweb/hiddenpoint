@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - HIDDEN POINT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff00a0;
+            --neon-purple: #c724ff;
+            --dark-bg: #0a0a10;
+            --card-bg: rgba(20, 15, 30, 0.7);
+            --grid-color: rgba(255, 0, 128, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efecto de fondo futurista */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 128, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 30% 60%, rgba(255, 0, 128, 0.05) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        /* Grid animado */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff00a0, #ff0077, #ff0066);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+            letter-spacing: 3px;
+            position: relative;
+            animation: neonPulse 3s infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0% { text-shadow: 0 0 10px rgba(255, 0, 128, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(255, 0, 128, 0.8), 0 0 50px rgba(255, 0, 128, 0.4); }
+        }
+
+        .logo::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff00a0, transparent);
+        }
+
+        .nav-button {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 5px;
+        }
+
+        .nav-button.active {
+            background: var(--neon-pink);
+            color: #0a0a10;
+        }
+
+        .nav-button:hover {
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .section-container {
+            display: none;
+        }
+
+        .section-container.active {
+            display: block;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 1.5rem;
+            display: flex;
+            gap: 20px;
+            min-height: 70vh;
+        }
+
+        .menu-lateral {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            border-radius: 15px;
+            background: var(--card-bg);
+            backdrop-filter: blur(5px);
+        }
+
+        .menu-button {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            font-family: 'Exo', sans-serif;
+            font-weight: 500;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 0, 128, 0.1);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+            transform: translateX(5px);
+        }
+
+        .menu-button::before {
+            content: ">";
+            position: absolute;
+            left: -20px;
+            transition: all 0.3s ease;
+            color: var(--neon-pink);
+        }
+
+        .menu-button:hover::before {
+            left: 10px;
+        }
+
+        .video-section, .pdf-section {
+            flex: 1;
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+            backdrop-filter: blur(5px);
+        }
+
+        .video-header, .pdf-header {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
+            position: relative;
+        }
+
+        .section-title {
+            color: var(--neon-pink);
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 0 0 25px rgba(255, 0, 128, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .title-file-type {
+            font-size: 0.8em;
+            color: var(--neon-purple);
+            margin-left: 10px;
+        }
+
+        .video-container {
+            flex: 1;
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-player {
+            width: 80%;
+            height: 0;
+            padding-bottom: 45%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.95);
+            transform-origin: center;
+        }
+
+        .pdf-viewer-container {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .pdf-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 15px;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .submenu {
+            display: none;
+            margin-top: 5px;
+            margin-left: 15px;
+            border-left: 2px solid var(--neon-pink);
+            padding-left: 10px;
+        }
+
+        .submenu-item {
+            padding: 8px;
+            margin: 3px 0;
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+            position: relative;
+            border-radius: 5px;
+            color: #ddd;
+        }
+
+        .submenu-item:hover {
+            background: rgba(255, 0, 128, 0.2);
+            transform: translateX(5px);
+        }
+
+        .submenu-item.active {
+            background: rgba(255, 0, 128, 0.3);
+            border: 1px solid var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.2);
+        }
+
+        .submenu-item.active::after {
+            content: "▶";
+            color: var(--neon-pink) !important;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .active-submenu {
+            display: block !important;
+        }
+
+        .file-type {
+            font-size: 0.7em;
+            color: var(--neon-purple);
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .btn-fullscreen {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-fullscreen i {
+            font-size: 0.9em;
+        }   
+        .btn-fullscreen:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+        }
+
+        .home-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: 2px solid rgba(255, 0, 128, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .tech-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.7);
+        }
+
+        /* Animación de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 0, 128, 0.6);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 20px); }
+            50% { transform: translate(10px, 30px); }
+            75% { transform: translate(-20px, 10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .nav-button {
+                margin: 5px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .main-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .menu-lateral {
+                width: 100%;
+                max-height: 250px;
+            }
+            
+            .video-player {
+                width: 95%;
+                padding-bottom: 53.44%;
+            }
+            
+            .tech-tag {
+                position: static;
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-lines"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="header">
+        <div class="logo">HIDDEN POINT</div>
+        <div>
+            <button class="nav-button active" onclick="showSection('programa')">PROGRAMAS</button>
+            <button class="nav-button" onclick="showSection('clases')">CLASES</button>
+            <button class="nav-button" onclick="showSection('teoria')">TEORÍA</button>
+            <button class="nav-button" onclick="showSection('practica')">PRÁCTICA</button>
+            <button class="nav-button" onclick="showSection('libros')">LIBROS</button>
+            <button class="nav-button" onclick="showSection('links')">LINKS</button>
+        </div>
+        <div class="tech-tag">JAVA</div>
+    </div>
+
+    <!-- SECCIÓN PROGRAMA -->
+    <div id="programa" class="section-container active">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('programa-fundamentos')">Fundamentos Java</button>
+                    <div id="programa-fundamentos" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1-tZuaQIjVZWYhu3viYNkpQkeSj9CqvFL', this)">
+                            Introducción a Java<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('19zNvkwK0NVgmclU3dEU-EBaFf8IHLUzn', this)">
+                            Sintaxis Básica<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <button class="menu-button" onclick="toggleSubmenu('programa-avanzado')">Java Avanzado</button>
+                    <div id="programa-avanzado" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('199wodnyypeV6LwyTtytkpv8Q5f17o24C', this)">
+                            Programación Orientada a Objetos<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1GglUyDBkNICZ5v0lAcX57S6jpfagF17Q', this)">
+                            Colecciones y Genéricos<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        
+            <section class="pdf-section">
+                <div class="pdf-header">
+                    <h2 class="section-title"><span id="programa-titulo">PROGRAMA</span></h2>
+                    <button class="btn-fullscreen" onclick="openFullscreen('programaPdfFrame')"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="pdf-viewer-container">
+                    <div class="pdf-wrapper">
+                        <iframe class="pdf-viewer" id="programaPdfFrame"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SECCIÓN CLASES -->
+    <div id="clases" class="section-container">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('clases-basico')">Java Básico</button>
+                    <div id="clases-basico" class="submenu">
+                        <div class="submenu-item" onclick="loadVideo('gVRehSU7AOo', this)">Variables y Tipos de Datos</div>
+                        <div class="submenu-item" onclick="loadVideo('XbXFgn5lZys', this)">Estructuras de Control</div>
+                        <div class="submenu-item" onclick="loadVideo('IMet90cvizc', this)">Métodos y Funciones</div>
+                    </div>
+                  
+                    <button class="menu-button" onclick="toggleSubmenu('clases-poo')">POO en Java</button>
+                    <div id="clases-poo" class="submenu">
+                        <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
+                        <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
+                        <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
+                    </div>
+                </div>
+            </nav>
+            
+            <section class="video-section">
+                <div class="video-header">
+                    <h2 class="section-title"><span id="clases-titulo">CLASES</span></h2>
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <div class="video-player">
+                            <iframe id="videoFrame" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SECCIÓN TEORÍA -->
+    <div id="teoria" class="section-container">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('teoria-sintaxis')">Sintaxis Java</button>
+                    <div id="teoria-sintaxis" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1x2-qAD09cNkqGVAvzbmkb4L3dkHU1o6g', this)">
+                            Tipos de Datos<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1rATR4t7yHEiHbT_ugrGz7k-hrEPfREai', this)">
+                            Estructuras de Control<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <button class="menu-button" onclick="toggleSubmenu('teoria-poo')">POO Teoría</button>
+                    <div id="teoria-poo" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('12uzfstE6K1Ynp1QLY6HV5HVVia8B-Ebj', this)">
+                            Clases y Objetos<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1K5MZGGd6JagTGupC7Ho0VbSD1di_FhNj', this)">
+                            Herencia<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section class="pdf-section">
+                <div class="pdf-header">
+                    <h2 class="section-title"><span id="teoria-titulo">TEORÍA</span></h2>
+                    <button class="btn-fullscreen" onclick="openFullscreen('pdfFrame')"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="pdf-viewer-container">
+                    <iframe class="pdf-viewer" id="pdfFrame"></iframe>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PRÁCTICA -->
+    <div id="practica" class="section-container">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('practica-ejercicios')">Ejercicios</button>
+                    <div id="practica-ejercicios" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1QpclzhxnCvYGTdpZ4Cn2yFWRcCwF6of6', this)">
+                            Ejercicios Básicos<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1L1kf5PIj5Gt0N42h07CvCQKG1Z5eivWd', this)">
+                            Ejercicios POO<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <button class="menu-button" onclick="toggleSubmenu('practica-proyectos')">Proyectos</button>
+                    <div id="practica-proyectos" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1_nGtK76aU69cIBHtSeVnpmMUCg9367MZ', this)">
+                            Proyecto Sistema de Gestión<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section class="pdf-section">
+                <div class="pdf-header">
+                    <h2 class="section-title"><span id="practica-titulo">PRÁCTICA</span></h2>
+                    <button class="btn-fullscreen" onclick="openFullscreen('sheetFrame')"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="pdf-viewer-container">
+                    <iframe class="pdf-viewer" id="sheetFrame"></iframe>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SECCIÓN LIBROS -->
+    <div id="libros" class="section-container">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('libros-clasicos')">Libros Clásicos</button>
+                    <div id="libros-clasicos" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1Ca7aYaJBIPXOIRFvJMKVyQ95b0ievfsx', this)">
+                            Java: The Complete Reference<span class="file-type">PDF</span>
+                        </div>
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1ul_c5G8TJsERqhgB-_XF-3pMjnm-2oFX', this)">
+                            Effective Java<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+
+                    <button class="menu-button" onclick="toggleSubmenu('libros-modernos')">Libros Modernos</button>
+                    <div id="libros-modernos" class="submenu">
+                        <div class="submenu-item" data-type="pdf" onclick="loadFile('1ByJYjcZ8kaid8Y7bCVQC64xnDv0OsSa3', this)">
+                            Java 17 Mastery<span class="file-type">PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section class="pdf-section">
+                <div class="pdf-header">
+                    <h2 class="section-title"><span id="libros-titulo">LIBROS</span></h2>
+                    <button class="btn-fullscreen" onclick="openFullscreen('librosPdfFrame')"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="pdf-viewer-container">
+                    <div class="pdf-wrapper">
+                        <iframe class="pdf-viewer" id="librosPdfFrame"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- SECCIÓN LINKS -->
+    <div id="links" class="section-container">
+        <div class="main-container">
+            <nav class="menu-lateral">
+                <div class="menu-container">
+                    <button class="menu-button" onclick="toggleSubmenu('links-tutoriales')">Tutoriales</button>
+                    <div id="links-tutoriales" class="submenu">
+                        <div class="submenu-item" onclick="window.open('https://docs.oracle.com/javase/tutorial/', '_blank')">
+                            Tutorial Oficial Java
+                        </div>
+                        <div class="submenu-item" onclick="window.open('https://www.w3schools.com/java/', '_blank')">
+                            W3Schools Java
+                        </div>
+                    </div>
+
+                    <button class="menu-button" onclick="toggleSubmenu('links-comunidad')">Comunidad</button>
+                    <div id="links-comunidad" class="submenu">
+                        <div class="submenu-item" onclick="window.open('https://stackoverflow.com/questions/tagged/java', '_blank')">
+                            Stack Overflow
+                        </div>
+                        <div class="submenu-item" onclick="window.open('https://www.reddit.com/r/java/', '_blank')">
+                            Reddit Java
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section class="pdf-section">
+                <div class="pdf-header">
+                    <h2 class="section-title"><span id="links-titulo">ENLACES ÚTILES</span></h2>
+                </div>
+                <div class="pdf-viewer-container" style="display: flex; justify-content: center; align-items: center;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-link" style="font-size: 3rem; color: var(--neon-pink); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--neon-pink); margin-bottom: 1rem;">Recursos Seleccionados</h3>
+                        <p style="color: #ddd; max-width: 500px; margin: 0 auto;">
+                            Explora los enlaces útiles en el menú lateral para acceder a tutoriales, 
+                            comunidades y recursos de aprendizaje sobre Java.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <a class="home-button" href="index.html" title="Volver al Inicio">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <script>
+        // Crear partículas flotantes
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 10 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Opacidad aleatoria
+                const opacity = Math.random() * 0.5 + 0.3;
+                particle.style.opacity = opacity;
+                
+                // Animación con duración aleatoria
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+
+        // Funcionalidad de la página
+        let currentVideoId = null;
+        let currentFileId = null;
+        let activeSubmenu = null;
+        let currentIframeId = null;
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-container').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            const titulo = document.getElementById(`${sectionId}-titulo`);
+            if(titulo) {
+                titulo.innerHTML = titulo.dataset.default || sectionId.toUpperCase();
+            }
+        }
+
+        function loadVideo(videoId, element) {
+            const sectionId = 'clases';
+            const videoFrame = document.getElementById('videoFrame');
+            
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?` + 
+                            'autoplay=1&rel=0&modestbranding=1&' + 
+                            'iv_load_policy=3&controls=1&fs=1&playsinline=1';
+            
+            const unidadNombre = element.closest('.submenu').previousElementSibling.textContent.trim();
+            const recursoNombre = element.textContent;
+            
+            document.getElementById(`${sectionId}-titulo`).innerHTML = 
+                `${unidadNombre} - ${recursoNombre} <span class="title-file-type">VIDEO</span>`;
+            
+            document.querySelectorAll('.submenu-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            
+            const parentSubmenu = element.closest('.submenu');
+            document.querySelectorAll('.submenu').forEach(sub => {
+                if(sub !== parentSubmenu) sub.classList.remove('active-submenu');
+            });
+            parentSubmenu.classList.add('active-submenu');
+        }
+
+        function loadFile(fileId, element) {
+            const section = document.querySelector('.section-container.active').id;
+            let frame;
+            
+            switch(section) {
+                case 'teoria':
+                    frame = document.getElementById('pdfFrame');
+                    break;
+                case 'programa':
+                    frame = document.getElementById('programaPdfFrame');
+                    break;
+                case 'practica':
+                    frame = document.getElementById('sheetFrame');
+                    break;
+                case 'libros':
+                    frame = document.getElementById('librosPdfFrame');
+                    break;
+            }
+
+            const type = element.dataset.type;
+            const unidadNombre = element.closest('.submenu').previousElementSibling.textContent.trim();
+            const recursoNombre = element.childNodes[0].nodeValue.trim();
+            document.getElementById(`${section}-titulo`).innerHTML = 
+                `${unidadNombre} - ${recursoNombre} <span class="title-file-type">${type.toUpperCase()}</span>`;
+
+            if(type === 'pdf') {
+                frame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            }
+
+            document.querySelectorAll('.submenu-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            
+            const parentSubmenu = element.closest('.submenu');
+            document.querySelectorAll('.submenu').forEach(sub => {
+                if(sub !== parentSubmenu) sub.classList.remove('active-submenu');
+            });
+            parentSubmenu.classList.add('active-submenu');
+        }
+
+        function toggleSubmenu(unidadId) {
+            const submenu = document.getElementById(unidadId);
+            const isActive = submenu.classList.contains('active-submenu');
+            
+            document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('active-submenu'));
+            
+            if (!isActive) {
+                submenu.classList.add('active-submenu');
+            }
+        }
+
+        function openFullscreen(iframeId) {
+            const iframe = document.getElementById(iframeId);
+            if (!iframe.src) {
+                alert('Primero seleccione un documento para ver');
+                return;
+            }
+            
+            iframe.requestFullscreen();
+        }
+    </script>
+</body>
+</html>
