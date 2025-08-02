@@ -552,15 +552,10 @@
                 max-height: 250px;
             }
             
-            /* MODIFICACIÓN PARA AUMENTAR LA ALTURA DEL CONTENEDOR DE VIDEO */
+            /* Contenedor de video más grande en móviles */
             .video-player {
-                width: 95%; /* Mantenemos el ancho */
-                padding-bottom: 70%; /* Aumentamos la altura de 53.44% a 70% */
-                min-height: 300px; /* Aseguramos una altura mínima */
-            }
-            
-            .video-player iframe {
-                transform: scale(1); /* Quitamos la reducción de escala */
+                width: 95%;
+                padding-bottom: 53.44%; /* 16:9 aspect ratio para móviles */
             }
             
             .video-container {
@@ -655,70 +650,70 @@
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-cadenas')">Cadenas</button>
                     <div id="clases-cadenas" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-cond')">Condicionales</button>
                     <div id="clases-cond" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-estructuras')">Estructuras</button>
                     <div id="clases-estructuras" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-bucles')">Bucles</button>
                     <div id="clases-bucles" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-funciones')">Funciones</button>
                     <div id="clases-funciones" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('mmp2KwH8m6A', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('EV_iQl-ZMso', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-poo')">Programación Orientada a Objetos</button>
                     <div id="clases-poo" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-excepciones')">Excepciones</button>
                     <div id="clases-excepciones" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-operadores')">Depuración de errores</button>
                     <div id="clases-operadores" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
 
                     <button class="menu-button" onclick="toggleSubmenu('clases-operadores')">Extras</button>
                     <div id="clases-operadores" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
-                    </button>
+                    </div>
                     
                 </div>
             </nav>
