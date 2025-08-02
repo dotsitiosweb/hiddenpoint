@@ -185,8 +185,28 @@
             border-radius: 15px;
             background: var(--card-bg);
             backdrop-filter: blur(5px);
-            overflow-y: auto; /* Barra de scroll vertical */
+            overflow-y: auto;
             height: 100%;
+        }
+
+        /* Estilo para la barra de scroll - Rosa Neón */
+        .menu-lateral::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .menu-lateral::-webkit-scrollbar-track {
+            background: rgba(10, 10, 18, 0.5);
+            border-radius: 10px;
+        }
+
+        .menu-lateral::-webkit-scrollbar-thumb {
+            background: var(--neon-pink);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .menu-lateral::-webkit-scrollbar-thumb:hover {
+            background: #ff0077;
         }
 
         .menu-button {
@@ -232,7 +252,7 @@
             flex-direction: column;
             background: var(--card-bg);
             backdrop-filter: blur(5px);
-            min-height: 0; /* Necesario para el flex */
+            min-height: 0;
         }
 
         .video-header, .pdf-header {
@@ -263,7 +283,29 @@
             padding: 15px;
             display: flex;
             align-items: center;
-            min-height: 0; /* Necesario para el flex */
+            min-height: 0;
+            overflow: auto;
+        }
+
+        /* Estilo para la barra de scroll en el contenedor de video */
+        .video-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .video-container::-webkit-scrollbar-track {
+            background: rgba(10, 10, 18, 0.5);
+            border-radius: 10px;
+        }
+
+        .video-container::-webkit-scrollbar-thumb {
+            background: var(--neon-pink);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .video-container::-webkit-scrollbar-thumb:hover {
+            background: #ff0077;
         }
 
         .video-wrapper {
@@ -274,10 +316,11 @@
             align-items: center;
         }
 
+        /* Tamaño reducido del reproductor de video */
         .video-player {
-            width: 80%;
+            width: 70%; /* Reducido de 80% */
             height: 0;
-            padding-bottom: 45%;
+            padding-bottom: 39.375%; /* 16:9 aspect ratio (70% * 9/16) */
             position: relative;
             margin: 0 auto;
         }
@@ -296,7 +339,27 @@
             overflow: auto;
             position: relative;
             background: rgba(0, 0, 0, 0.5);
-            min-height: 0; /* Necesario para el flex */
+            min-height: 0;
+        }
+
+        /* Estilo para la barra de scroll en el visor de PDF */
+        .pdf-viewer-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .pdf-viewer-container::-webkit-scrollbar-track {
+            background: rgba(10, 10, 18, 0.5);
+            border-radius: 10px;
+        }
+
+        .pdf-viewer-container::-webkit-scrollbar-thumb {
+            background: var(--neon-pink);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .pdf-viewer-container::-webkit-scrollbar-thumb:hover {
+            background: #ff0077;
         }
 
         .pdf-wrapper {
@@ -488,9 +551,14 @@
                 max-height: 250px;
             }
             
+            /* Contenedor de video más grande en móviles */
             .video-player {
                 width: 95%;
-                padding-bottom: 53.44%;
+                padding-bottom: 53.44%; /* 16:9 aspect ratio para móviles */
+            }
+            
+            .video-container {
+                overflow: auto; /* Permite scroll si el contenido es grande */
             }
             
             .tech-tag {
