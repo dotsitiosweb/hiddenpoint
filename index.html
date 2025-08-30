@@ -170,9 +170,24 @@
         /* Botones de categorías con estilo futurista - MEJORAS PRINCIPALES */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased min width for better 3-column layout */
+            max-width: 1200px; /* Added max width to control layout */
             gap: 1.5rem;
-            margin: 3rem 0;
+            margin: 3rem auto; /* Added auto margin for centering */
+        }
+
+        /* Added media query for exactly 3 columns on larger screens */
+        @media (min-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Added media query for 2 columns on medium screens */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .category-card {
@@ -465,7 +480,6 @@
             <p>de una vez lokite</p>
         </section>
 
-        
         <div class="category-grid">
             <div class="category-card">
                 <i class="fas fa-rocket"></i>
@@ -484,9 +498,6 @@
                     <a href="https://todocodeacademy.com/course/introduccion-a-las-bases-de-datos-con-mysql/" class="btn">ACCEDER</a>
                 </div>
             </div>
-        </div>
-        
-
             
             <div class="category-card">
                 <i class="fab fa-java"></i>
@@ -507,7 +518,7 @@
             </div>
 
             <div class="category-card">
-                <i class="fab fa-java"></i>
+                <i class="fab fa-html5"></i> <!-- Changed icon to HTML5 for better representation -->
                 <h2>HTML y CSS</h2>
                 <p>Comenzando</p>
                 <div class="btn-container">
@@ -532,7 +543,7 @@
                     <a href="javascript.html" class="btn">ACCEDER</a>
                 </div>
             </div>
-            
+        </div>
 
         <footer>
             <p>HIDDEN POINT &copy; 2025</p>
@@ -575,6 +586,7 @@
     </script>
 </body>
 </html>
+
 
 
 
