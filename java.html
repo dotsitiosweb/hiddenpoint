@@ -9,11 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-pink: #ff00a0;
-            --neon-purple: #c724ff;
-            --dark-bg: #0a0a10;
-            --card-bg: rgba(20, 15, 30, 0.7);
-            --grid-color: rgba(255, 0, 128, 0.1);
+            --neon-pink: #ff00ff;
+            --neon-purple: #8a2be2;
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(30, 30, 50, 0.7);
+            --grid-color: rgba(255, 0, 255, 0.1);
+            --primary-color: #e6e6fa;
         }
 
         * {
@@ -47,9 +48,9 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 128, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 30% 60%, rgba(255, 0, 128, 0.05) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 30% 60%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
             z-index: -1;
         }
 
@@ -79,7 +80,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 255, 0.3);
             flex-shrink: 0;
         }
 
@@ -88,18 +89,18 @@
             font-size: 2.5rem;
             font-weight: 800;
             text-transform: uppercase;
-            background: linear-gradient(45deg, #ff00a0, #ff0077, #ff0066);
+            background: linear-gradient(45deg, #ff00ff, #8a2be2, #e6e6fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
             letter-spacing: 3px;
             position: relative;
             animation: neonPulse 3s infinite alternate;
         }
 
         @keyframes neonPulse {
-            0% { text-shadow: 0 0 10px rgba(255, 0, 128, 0.5); }
-            100% { text-shadow: 0 0 25px rgba(255, 0, 128, 0.8), 0 0 50px rgba(255, 0, 128, 0.4); }
+            0% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(255, 0, 255, 0.8), 0 0 50px rgba(255, 0, 255, 0.4); }
         }
 
         .logo::after {
@@ -109,7 +110,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #ff00a0, transparent);
+            background: linear-gradient(90deg, transparent, #ff00ff, transparent);
         }
 
         .nav-button {
@@ -129,11 +130,11 @@
 
         .nav-button.active {
             background: var(--neon-pink);
-            color: #0a0a10;
+            color: #1a1a2e;
         }
 
         .nav-button:hover {
-            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4);
             background: var(--neon-pink);
             color: var(--dark-bg);
         }
@@ -182,7 +183,7 @@
             flex-direction: column;
             gap: 10px;
             padding: 15px;
-            border: 1px solid rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.3);
             border-radius: 15px;
             background: var(--card-bg);
             backdrop-filter: blur(5px);
@@ -196,18 +197,18 @@
         }
 
         .menu-lateral::-webkit-scrollbar-track {
-            background: rgba(10, 10, 18, 0.5);
+            background: rgba(26, 26, 46, 0.5);
             border-radius: 10px;
         }
 
         .menu-lateral::-webkit-scrollbar-thumb {
             background: var(--neon-pink);
             border-radius: 10px;
-            border: 2px solid rgba(255, 0, 128, 0.3);
+            border: 2px solid rgba(255, 0, 255, 0.3);
         }
 
         .menu-lateral::-webkit-scrollbar-thumb:hover {
-            background: #ff0077;
+            background: #8a2be2;
         }
 
         .menu-button {
@@ -227,8 +228,8 @@
         }
 
         .menu-button:hover {
-            background: rgba(255, 0, 128, 0.1);
-            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
             transform: translateX(5px);
         }
 
@@ -246,7 +247,7 @@
 
         .video-section, .pdf-section {
             flex: 1;
-            border: 1px solid rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 0, 255, 0.3);
             border-radius: 15px;
             overflow: hidden;
             display: flex;
@@ -258,7 +259,7 @@
 
         .video-header, .pdf-header {
             padding: 1.2rem;
-            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 255, 0.3);
             position: relative;
             flex-shrink: 0;
         }
@@ -267,7 +268,7 @@
             color: var(--neon-pink);
             text-align: center;
             font-size: 1.8rem;
-            text-shadow: 0 0 25px rgba(255, 0, 128, 0.3);
+            text-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
             font-family: 'Orbitron', sans-serif;
         }
 
@@ -295,18 +296,18 @@
         }
 
         .video-container::-webkit-scrollbar-track {
-            background: rgba(10, 10, 18, 0.5);
+            background: rgba(26, 26, 46, 0.5);
             border-radius: 10px;
         }
 
         .video-container::-webkit-scrollbar-thumb {
             background: var(--neon-pink);
             border-radius: 10px;
-            border: 2px solid rgba(255, 0, 128, 0.3);
+            border: 2px solid rgba(255, 0, 255, 0.3);
         }
 
         .video-container::-webkit-scrollbar-thumb:hover {
-            background: #ff0077;
+            background: #8a2be2;
         }
 
         .video-wrapper {
@@ -349,18 +350,18 @@
         }
 
         .pdf-viewer-container::-webkit-scrollbar-track {
-            background: rgba(10, 10, 18, 0.5);
+            background: rgba(26, 26, 46, 0.5);
             border-radius: 10px;
         }
 
         .pdf-viewer-container::-webkit-scrollbar-thumb {
             background: var(--neon-pink);
             border-radius: 10px;
-            border: 2px solid rgba(255, 0, 128, 0.3);
+            border: 2px solid rgba(255, 0, 255, 0.3);
         }
 
         .pdf-viewer-container::-webkit-scrollbar-thumb:hover {
-            background: #ff0077;
+            background: #8a2be2;
         }
 
         .pdf-wrapper {
@@ -389,8 +390,8 @@
         .submenu-item {
             padding: 8px;
             margin: 3px 0;
-            background: rgba(255, 0, 128, 0.1);
-            border: 1px solid rgba(255, 0, 128, 0.3);
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 0, 255, 0.3);
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 0.9em;
@@ -400,14 +401,14 @@
         }
 
         .submenu-item:hover {
-            background: rgba(255, 0, 128, 0.2);
+            background: rgba(255, 0, 255, 0.2);
             transform: translateX(5px);
         }
 
         .submenu-item.active {
-            background: rgba(255, 0, 128, 0.3);
+            background: rgba(255, 0, 255, 0.3);
             border: 1px solid var(--neon-pink);
-            box-shadow: 0 0 10px rgba(255, 0, 128, 0.2);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
         }
 
         .submenu-item.active::after {
@@ -481,8 +482,8 @@
             justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            border: 2px solid rgba(255, 0, 128, 0.5);
-            box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
+            border: 2px solid rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
             transition: all 0.3s ease;
         }
 
@@ -498,7 +499,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             color: var(--neon-pink);
-            text-shadow: 0 0 15px rgba(255, 0, 128, 0.7);
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
         }
 
         /* Animación de partículas */
@@ -515,8 +516,8 @@
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 0, 128, 0.6);
-            box-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
+            background: rgba(255, 0, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
             animation: float 10s infinite ease-in-out;
         }
 
@@ -701,15 +702,15 @@
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
                     </div>
 
-                    <button class="menu-button" onclick="toggleSubmenu('clases-operadores')">Depuración de errores</button>
-                    <div id="clases-operadores" class="submenu">
+                    <button class="menu-button" onclick="toggleSubmenu('clases-depuracion')">Depuración de errores</button>
+                    <div id="clases-depuracion" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
                     </div>
 
-                    <button class="menu-button" onclick="toggleSubmenu('clases-operadores')">Extras</button>
-                    <div id="clases-operadores" class="submenu">
+                    <button class="menu-button" onclick="toggleSubmenu('clases-extras')">Extras</button>
+                    <div id="clases-extras" class="submenu">
                         <div class="submenu-item" onclick="loadVideo('', this)">Clases y Objetos</div>
                         <div class="submenu-item" onclick="loadVideo('', this)">Herencia y Polimorfismo</div>
                         <div class="submenu-item" onclick="loadVideo('_VsuoZ2xSfM', this)">Interfaces y Clases Abstractas</div>
@@ -1041,3 +1042,4 @@
     </script>
 </body>
 </html>
+
